@@ -1,4 +1,5 @@
 // You can delete the imports that aren't needed, but you don't have to since the compiler automatically deletes unused imports.
+// Also don't worry about comments because the compiler automatically removes them before running the program :)
 import java.io.*;
 import java.util.*;
 import java.util.stream.*;
@@ -163,9 +164,12 @@ public class Main {
         DataOutputStream dos = new DataOutputStream(System.out);
         StringBuilder sb = new StringBuilder();
         
+	int a = io.nextInt(), b = io.nextInt(), c = io.nextInt();
+	sb.append("The sum of these three numbers is: ").append(a+b+c).append("\n");
+
         dos.write((sb.toString()).getBytes());
         
-        //io.close(); // You don't have to close the DataInputStream (you should, but not doing so allows you to make your code faster)
+        //io.close(); // You don't have to close the DataInputStream (you probably should, but not doing so allows you to make your code even faster)
         dos.flush();
         dos.close();
     }
