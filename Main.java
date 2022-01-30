@@ -1,5 +1,9 @@
-// You can delete the imports that aren't needed, but you don't have to since the compiler automatically deletes unused imports.
-// Also don't worry about comments because the compiler automatically removes them before running the program :)
+// You can delete the imports that aren't needed, but you don't have to
+// since the compiler automatically deletes unused imports.
+
+// Also don't worry about comments because the compiler automatically removes
+// them before running the program :)
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.*;
@@ -10,7 +14,11 @@ import javax.swing.*;
 import java.time.*;
 import java.time.format.*;
 
-// This code was based on the GeeksForGeeks template (https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/) as well as the USACO Fast IO Template (https://usaco.guide/general/fast-io?lang=java and https://usaco.guide/general/input-output?lang=java)
+// This code was based on the GeeksForGeeks template
+// (https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/)
+// as well as the USACO Fast IO Template (https://usaco.guide/general/fast-io?lang=java
+// and https://usaco.guide/general/input-output?lang=java)
+
 public class Main {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream stream;
@@ -169,8 +177,31 @@ public class Main {
 
         dos.write((sb.toString()).getBytes());
         
-        //io.close(); // You don't have to close the DataInputStream (you probably should, but not doing so allows you to make your code even faster)
+        //io.close(); // You don't have to close the DataInputStream (you probably
+		      // should, but not doing so allows you to make your code even faster)
         dos.flush();
         dos.close();
     }
 }
+// One important thing to remember is that you don't have to worry about using
+// code such as the one below:
+/*
+import java.io.*;
+import java.util.stream.*;
+
+public class Main {
+	public static void main(String[] args) {
+		BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
+		String lines = br.lines().collect(Collectors.joining());
+		lines.replaceAll("\n", "");
+		System.out.println(lines.trim().replaceAll(" +", " "));
+	}
+}
+*/
+// as a way to take your code and put it all one one line (e.g. :
+
+//import java.io.*;import java.util.stream.*;public class Main {	public static void main(String[] args) {		BufferedReader br = new BufferedReader (new InputStreamReader (System.in));		String lines = br.lines().collect(Collectors.joining());		lines.replaceAll("\n", "");		System.out.println(lines.trim().replaceAll(" +", " "));	}}
+
+// because that doesn't actually make your code run faster, and it only makes
+// your code not only unreadable, but also very tough do debug, say on a wrong
+// answer. Therefore, don't do this.
