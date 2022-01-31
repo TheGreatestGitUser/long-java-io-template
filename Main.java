@@ -46,6 +46,16 @@ public class Main {
 
 Here is the code for the fast IO evenly spaced out for visual purposes and for ease of updating:
 (Note that the reason why it is on one line is so it is easier to copy and paste)
+(It is also important to note that if you wanted to save space, you could use the "nextLong()"
+method, rename it to something like "nextInteger()", and then use it to read in any integer
+value, casting to the desired data type. For example, if you wanted an integer, you could say
+"int n = (int) io.nextInteger();". The same could be said for decimals, how you could rename
+the method "nextLong()" to "nextDecimal()" and then casting to the desired decimal, such as a
+float. You could even use the "nextDecimal()" method for ALL NUMERIC TYPES, just casting to the
+desired data type. For example, you could read in a long by doing "long n = (long) nextDecimal();".
+Lastly, if you wanted to save space, you can delete all of the unnecessary methods, such as the ones
+that read in 1D and 2D arrays as those can be easily implemented.)
+
 
 private static class FastInput {
     final private int BUFFER_SIZE = 1 << 16;
