@@ -53,8 +53,16 @@ value, casting to the desired data type. For example, if you wanted an integer, 
 the method "nextLong()" to "nextDecimal()" and then casting to the desired decimal, such as a
 float. You could even use the "nextDecimal()" method for ALL NUMERIC TYPES, just casting to the
 desired data type. For example, you could read in a long by doing "long n = (long) nextDecimal();".
-Lastly, if you wanted to save space, you can delete all of the unnecessary methods, such as the ones
-that read in 1D and 2D arrays as those can be easily implemented.)
+You could also combine the next() and nextLine() methods into one by using the next() method but
+adding a parameter called "char delim" that specifies the delimiter that you want to split by
+as well as replacing the line "if (c == ' ') if (cnt != 0) break;" with 
+"if (c == delim) if (cnt != 0) break;" and then in the implementation passing through either ' '
+to split by spaces (like next()) or '\n' to split by lines (like nextLine()). Lastly, if you
+wanted to save space, you can delete all of the unnecessary methods, such as the ones that read
+in 1D and 2D arrays as those can be easily implemented. Therefore, the only methods you would
+be left with are nextDouble() as it will become the nextDecimal() method, next() as it will
+be used for next() and nextLine(), allLines(), fillBuffer(), read(), and close(). If you scroll
+to the bottom of this page, you will see the short version of this code.)
 
 
 private static class FastInput {
@@ -107,7 +115,7 @@ private static class FastInput {
         byte[] buf = new byte[100000];
         int cnt = 0, c;
         while ((c = read()) != -1) {
-            if (c <= ' ') if (cnt != 0) break;
+            if (c == ' ') if (cnt != 0) break;
             buf[cnt++] = (byte)c;
         }
         return new String(buf, 0, cnt);
@@ -449,4 +457,62 @@ because that doesn't actually make your code run faster, and it only makes
 your code not only unreadable, but also very tough do debug, say on a wrong
 answer. Therefore, don't do this. The only reason why the FastIO class is on
 one line is so that it can be copied and pasted easily
+*/
+/*
+Small but fast code:
+
+private static class FastInput {
+    final private int BUFFER_SIZE = 1 << 16;
+    private DataInputStream stream = new DataInputStream(System.in);
+    private byte[] buffer = new byte[BUFFER_SIZE];
+    private int bufferPointer = 0, bytesRead = 0;
+    public FastInput() {
+    }
+    public String next(char delim) throws IOException {
+        byte[] buf = new byte[100000];
+        int cnt = 0, c;
+        while ((c = read()) != -1) {
+            if (c == delim) if (cnt != 0) break;
+            buf[cnt++] = (byte)c;
+        }
+        return new String(buf, 0, cnt);
+    }
+    public String nextLine() throws IOException {
+        byte[] buf = new byte[100000];
+        int cnt = 0, c;
+        while ((c = read()) != -1) {
+            if (c == '\n') if (cnt != 0) break;
+            buf[cnt++] = (byte)c;
+        }
+        return new String(buf, 0, cnt);
+    }
+    public double nextDecimal() throws IOException {
+        double ret = 0, div = 1;
+        byte c = read();
+        while (c <= ' ') c = read();
+        boolean neg = (c == '-');
+        if (neg) c = read();
+        do ret = ret * 10 + c - '0'; while ((c = read()) >= '0' && c <= '9');
+        if (c == '.') while ((c = read()) >= '0' && c <= '9') ret += (c - '0') / (div *= 10);
+        if (neg) return -ret;
+        return ret;
+    }
+    private void fillBuffer() throws IOException {
+        bytesRead = stream.read(buffer, bufferPointer = 0, BUFFER_SIZE);
+        if (bytesRead == -1) buffer[0] = -1;
+    }
+    private byte read() throws IOException {
+        if (bufferPointer == bytesRead) fillBuffer();
+        return buffer[bufferPointer++];
+    }
+    public void close() throws IOException {
+        stream.close();
+    }
+    public String allLines() throws IOException {
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        for (int length; (length = stream.read(buffer)) != -1; ) result.write(buffer, 0, length);
+        return result.toString("UTF-8");
+    }
+}
 */
